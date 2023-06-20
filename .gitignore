@@ -1,2 +1,7 @@
-testsrc/ 
+keep_local/
+testsrc/
+build/
+dist/
 .idea/
+__pycache__/
+*.spec
