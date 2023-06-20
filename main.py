@@ -2,18 +2,18 @@
 
 import sys
 import os.path as osp
-from PyPDF2 import PdfFileMerger
+from PyPDF2 import PdfMerger
 
 opt_o: str = '-o'
 ext_o: str = '.out'
 
 
-def mergePdf(files, targetFile):
-    merger = PdfFileMerger()
+def mergePdf(files: list, targetFile: str):
+    merger = PdfMerger()
     for f in files:
         merger.append(f)
     merger.write(str(targetFile))
-    print("merge pdf files to [{0}]".format(targetFile))
+    print("Merge PDF files to [{0}]".format(targetFile))
 
 
 if "__main__" == __name__:
@@ -35,4 +35,4 @@ if "__main__" == __name__:
         templist = osp.splitext(sys.argv[1])
         ofilename = templist[0] + ext_o + templist[1]
 
-    mergePdf(files, ofilename)         # 调用合并函数
+    mergePdf(files, ofilename)
