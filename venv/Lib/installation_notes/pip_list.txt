@@ -1,0 +1,12 @@
+Package                   Version
+------------------------- --------
+altgraph                  0.17.3
+pefile                    2023.2.7
+pip                       23.2.1
+pyinstaller               5.13.0
+pyinstaller-hooks-contrib 2023.6
+PyPDF2                    3.0.1
+pywin32-ctypes            0.2.2
+setuptools                68.1.0
+tinyaes                   1.0.4
+typing_extensions         4.7.1
