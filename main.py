@@ -82,49 +82,57 @@ if "__main__" == __name__:
             ofilename = default_o
     print("Final Output will be: [{0}].".format(ofilename))
 
-    files = sys.argv[1:]
+    templist = sys.argv[1:]
+    files = {}
+    for i in range(0, len(templist)):
+        files[i] = templist[i]
 
     templist = files.copy()
-    files_f = []
-    files_d = []
+    files_f = {}
+    files_d = {}
     for item in templist:
         if isFile:
-            files_f.append(item)
-            files.remove(item)
+            files_f[item] = files[item]
+            files.pop(item)
             isFile = False
             continue
         elif isDir:
-            files_d.append(item)
-            files.remove(item)
+            files_d[item] = files[item]
+            files.pop(item)
             isDir = False
             continue
 
-        if item == opt_f:
+        if templist[item] == opt_f:
             isFile = True
-            files.remove(opt_f)
-        elif item == opt_d:
+            files.pop(item)
+        elif templist[item] == opt_d:
             isDir = True
-            files.remove(opt_d)
+            files.pop(item)
         else:
             isFile = False
             isDir = False
 
-    if if_NoAssumption_FileType is True and files != []:
+    if if_NoAssumption_FileType is True and files != {}:
         # print(files_f)
         exitstr = "Stopped because item's type not indicated. Items:\n"
         for item in files:
-            exitstr += f" - [{item}]\n"
+            exitstr += f" - [{files[item]}]\n"
         exit(exitstr)
 
-    templist = []
+    templist = {}
     for item in files:
-        templist.extend(readdir_pdf(item))
-    files = templist
+        templist[item] = readdir_pdf(files[item])
+    files = templist.copy()
 
     for dir in files_d:
-        files.extend(readdir_pdf(dir))
+        files[dir] = readdir_pdf(files_d[dir])
     for file in files_f:
-        files.append(file)
+        files[file] = readdir_pdf(files_f[file])
+
+    templist = []
+    for item in sorted(files.keys()):
+        templist.extend(files[item])
+    files = templist.copy()
 
     printstr = "Merge Sequence:\n"
     for file in files:
