@@ -117,7 +117,7 @@ if "__main__" == __name__:
         exitstr = "Stopped because item's type not indicated. Items:\n"
         for item in files:
             exitstr += f" - [{files[item]}]\n"
-        exit(exitstr)
+        sys.exit(exitstr)
 
     templist = {}
     for item in files:
